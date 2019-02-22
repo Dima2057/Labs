@@ -1,0 +1,36 @@
+package lab_2;
+/**
+ * C5 = 1 транспонування
+ * C7 = 5 тип елементів матриці char
+ * C11 = 4 Обчислити суму найбільших елементів в рядках матриці
+ * з парними номерами та найменших елементів в рядках
+ * матриці з непарними номерами
+ */
+public class Main {
+    public static void main(String[] args) {
+        final char[][] B = {{1,2,3},
+                            {4,5,6},
+                            {7,8,9}};
+        for(int i = 0; i < B.length; i++ ){
+            for (int j = 0; j < B[i].length; j++ ){
+                System.out.print(B[i][j] + " ");
+            }
+            System.out.println();
+        }
+        char  trans;
+        for (int i = 0; i < B.length - 1; i++ ){
+            for (int j = i + 1; j < B[i].length; j++ ){
+                trans = B[i][j];
+                B[i][j] = B[j][i];
+                B[i][j] = trans;
+            }
+        }
+        System.out.println("~~~~~~~~~~~~~~~~~~~");
+        for (int i = 0; i < B.length; i++ ){
+            for (int j = 0; j < B[i].length; j++){
+                System.out.print(B[i][j] + " ");
+            }
+            System.out.println();
+        }
+    }
+}
