@@ -1,4 +1,10 @@
 package lab_2;
+
+import com.oracle.xmlns.internal.webservices.jaxws_databinding.SoapBindingParameterStyle;
+
+import javax.sound.midi.Soundbank;
+import java.sql.SQLOutput;
+
 /**
  * C5 = 1 транспонування
  * C7 = 5 тип елементів матриці char
@@ -13,7 +19,7 @@ public class Main {
                             {7,8,9}};
         for(int i = 0; i < B.length; i++ ){
             for (int j = 0; j < B[i].length; j++ ){
-                System.out.print(B[i][j] + " ");
+                System.out.print((int) B[i][j] + " ");
             }
             System.out.println();
         }
@@ -22,15 +28,39 @@ public class Main {
             for (int j = i + 1; j < B[i].length; j++ ){
                 trans = B[i][j];
                 B[i][j] = B[j][i];
-                B[i][j] = trans;
+                B[j][i] = trans;
             }
         }
         System.out.println("~~~~~~~~~~~~~~~~~~~");
         for (int i = 0; i < B.length; i++ ){
             for (int j = 0; j < B[i].length; j++){
-                System.out.print(B[i][j] + " ");
+                System.out.print((int) B[i][j] + " ");
             }
             System.out.println();
         }
+        char max;
+        char S = 0;
+        for (int i = 0; i < B.length; i += 2){
+            max = B[i][0];
+            for (int j = 0; j < B[i].length; j++){
+                if ( max < B[i][j] ){
+                     max = B[i][j];
+
+                }
+            }
+            S += max;
+        }
+        char min;
+        for (int i = 1; i < B.length; i += 2){
+            min = B[i][0];
+            for (int j = 0; j < B[i].length; j++){
+                if ( min > B[i][j]){
+                    min = B[i][j];
+                }
+            }
+            S += min;
+        }
+
+        System.out.println((int) S);
     }
 }
