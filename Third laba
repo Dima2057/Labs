@@ -1,7 +1,7 @@
 public class Main{
     public static void main(String[] args){
-        String S = "Слова рядка, які починаються з приголосної літери."; //вводимо рядок
-        int n = 5;
+        String S = "zdes text iz kotorogo nuzhno udalit vse slova iz pjati bukv kotoryje nachinajutsja na glasnuju bukvu"; //вводимо рядок
+        int n = 4;
         String text = S.trim(); // видаляємо пробіли на початку та в кінці рядка
         if ( text.length() == 0 ){ //перевірка на введення пустого рядка
             System.out.println("Ви не ввели слова.");
@@ -10,14 +10,12 @@ public class Main{
 
         String[] strArr = text.split(" ");//розбиваємо текст на масив слів
         for ( int i = 0; i < strArr.length; i++){
-            if ( strArr[i].length()%n == 0){
-                strArr[i]="";
+            char first = strArr[i].charAt(0); // перша буква кожного слова
+            if (( strArr[i].length()%n == 0) && ((first != 'a')&&(first != 'e')&&(first != 'i')&&(first != 'o')&&(first != 'u')&&(first != 'y'))){
+                strArr[i]= " ";
 
             }
 
-            System.out.println(strArr[i]+" ");
+            System.out.print(strArr[i]+" ");
         }
     }
-
-
-}
