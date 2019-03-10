@@ -1,24 +1,23 @@
 public class Main{
-    public static void main(String[] args) {
-        // Задаємо текст
-        String text = "zdes text iz kotorogo nuzhno udalit vse slova iz pjati bukv kotoryje nachinajutsja na glasnuju bukvu";
-        // Виводимо текст
-        System.out.println(text);
+    public static void main(String[] args){
+        String S = "Слова рядка, які починаються з приголосної літери."; //вводимо рядок
+        int n = 5;
+        String text = S.trim(); // видаляємо пробіли на початку та в кінці рядка
+        if ( text.length() == 0 ){ //перевірка на введення пустого рядка
+            System.out.println("Ви не ввели слова.");
+        }
+        System.out.println(S);
 
         String[] strArr = text.split(" ");//розбиваємо текст на масив слів
-        StringBuilder sb = new StringBuilder();
-        for (int i=0; i<strArr.length; i++){
-            char first = strArr[i].charAt(0); // перша буква кожного слова
+        for ( int i = 0; i < strArr.length; i++){
+            if ( strArr[i].length()%n == 0){
+                strArr[i]="";
 
-            if(!((strArr[i].length()%5==0)  &&  ((first != 'a')&&(first != 'e')&&(first != 'i')&&(first != 'o')&&(first != 'u')&&(first != 'y')))){
-                sb.append(strArr[i]).append(" ");
             }
+
+            System.out.println(strArr[i]+" ");
         }
-        String outText = sb.toString().trim();
-
-        // вивід результата
-        System.out.print(outText+" "+"\n\n");
-
-
     }
+
+
 }
