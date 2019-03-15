@@ -1,6 +1,13 @@
+package com.company;
+
+/**
+ *C3=2 - String
+ * Із заданого тексту видалити всі слова визначеної довжини,
+ * що починаються з приголосної літери.
+ */
 public class Main{
     public static void main(String[] args){
-        String S = "zdes text iz kotorogo nuzhno udalit vse slova iz pjati bukv kotoryje nachinajutsja na glasnuju bukvu"; //вводимо рядок
+        String S = "Zdes, text iz kotorogo nuzhno udalit vse slova iz chotyrioh bukv kotoryje nachinajutsja na glasnuju bukvu"; //вводимо рядок
         int n = 4;
         String text = S.trim(); // видаляємо пробіли на початку та в кінці рядка
         if ( text.length() == 0 ){ //перевірка на введення пустого рядка
@@ -8,10 +15,10 @@ public class Main{
         }
         System.out.println(S);
 
-        String[] strArr = text.split(" ");//розбиваємо текст на масив слів
+        String[] strArr = text.split("[.?!, ]+");//розбиваємо текст на масив слів
         for ( int i = 0; i < strArr.length; i++){
             char first = strArr[i].charAt(0); // перша буква кожного слова
-            if (( strArr[i].length()%n == 0) && ((first != 'a')&&(first != 'e')&&(first != 'i')&&(first != 'o')&&(first != 'u')&&(first != 'y'))){
+            if (( strArr[i].length() == n) && ((first != 'a')&&(first != 'e')&&(first != 'i')&&(first != 'o')&&(first != 'u')&&(first != 'y'))){
                 strArr[i]= " ";
 
             }
@@ -19,3 +26,6 @@ public class Main{
             System.out.print(strArr[i]+" ");
         }
     }
+
+
+}
