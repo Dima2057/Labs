@@ -1,0 +1,52 @@
+package com.company;
+
+/**
+ * @autor Dmytro Tymochko
+ *
+ */
+
+public class Main{
+    public static void main(String... args){
+
+    }
+}
+
+class Cl1 implements If1 {
+    public Cl1 myCl1;
+    public Cl2 myCl2;
+
+    @Override
+    public void meth1(){
+        System.out.println("Cl1 meth1");
+    }
+}
+
+class Cl2 extends Cl1 implements If2 {
+    public If1 myIf1;
+
+    @Override
+    public void meth1(){
+        System.out.println("Cl2 meth1");
+    }
+    public void meth2(){
+        System.out.println("Cl2 meth2");
+    }
+    public void meth3(){
+        System.out.println("Cl2 meth3");
+    }
+
+}
+
+class Cl3 implements If3 {
+    public Cl1 myCl1;
+
+    @Override
+    public void meth3(){
+        System.out.println("Cl3 meth3");
+    }
+    public void meth1(){
+        System.out.println("Cl3 meth1");
+    }
+
+
+}
