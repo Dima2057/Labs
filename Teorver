@@ -1,0 +1,30 @@
+from math import factorial
+import random
+
+def formula(a,b):
+    p = float(1 / 6)
+    q = float(5 / 6)
+    result = (factorial(a) / (factorial(b) * factorial(a - b))) * (pow(p, b)) * (pow(q, a - b))
+    return result
+result = 0
+for b in range(2, 7):
+    result += formula(6, b)
+print(result)
+i = 0
+num = 0
+allSix = 0
+isNum = False
+while(i < 100):
+    i+=1
+    last = num
+    num = int(random.random()*6)
+    if(num == last == 5):
+        if(not isNum):
+            allSix+=1
+            isNum = True
+    else:
+        isNum = False
+
+print(allSix)
+print(1000)
+print(allSix/1000)
