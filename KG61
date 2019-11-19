@@ -1,0 +1,62 @@
+# Лаб 6 КГ
+# Тут немного пояснений
+import tkinter as tk
+import math
+import time
+# aehdebfgcbdcghfe
+#
+# w l h
+# a(0,0,0) e(0,l,0)
+# b(w/2, 0, -h) f(w/2, l, -h)
+# c(0, 0, -2h) g(0, l, -2h)
+# d(-w/2, 0, -h) h(-w/2, l, -h)
+# Эта функция делает проекцию из трехмерной системы координат на двухмерную
+def s(x, y, z, dist):
+    return (1000/2+x*dist/(z+dist), 1000/2-y*dist/(z+dist))
+
+# Следую щие 3 функйци ивращают фигуру вокруг осей(по правильному мы находимся на некотором расстоянии от начала координат на оси Z, поэтому эти повороты будут крутить в непривычную сторону) ну угол fi РАДИАН
+def matrfor_x(x, y, z, fi):
+    return (x, y*math.cos(fi)-z*math.sin(fi), y*math.sin(fi)+z*math.cos(fi))
+def matrfor_y(x, y, z, fi):
+    return (x*math.cos(fi)+z*math.sin(fi), y, -x*math.sin(fi)+z*math.cos(fi))
+def matrfor_z(x, y, z, fi):
+    return (x*math.cos(fi)-y*math.sin(fi), x*math.sin(fi)+y*math.cos(fi), z)
+# Рисует фигуру, тут крч немного придется думать
+# Надо нарисовать фигуру ОДНОЙ линией, она может проходить через себя несколько раз, но должна быть ОДНА
+def drawFigure(w, l, h):
+    # width long high
+    # x0 x1
+    # y0 y1
+    # У меня фигура с 6 вершинами, поэтому 6 точек, которые я задаю следующими формулами относительно необходимой длины, ширины и высоты фигуры
+    A = (0, 0, 0)
+    E = (0, l, 0)
+    B = (w / 2, 0, -h)
+    F = (w / 2, l, -h)
+    C = (0, 0, -2 * h)
+    G = (0, l, -2 * h)
+    D = (-w / 2, 0, -h)
+    H = (-w / 2, l, -h)
+    # обходит мою фигуру по точкам в таком порядке: aehdebfgcbdcghfe
+    a = [A, E, H, D, A, B, F, G, C, B, D, C, G, H, F, E]
+    return a
+root=tk.Tk()
+root.geometry("1000x1000")
+canv = tk.Canvas(root, bg='white', width=1000, height=1000)
+dist = 250 # ВНИМАНИЕ!!! задает растояние до точки 0 0 0 если оно будет слишком малое то будет бред на экране
+canv.place(x=0, y=0)
+j=0
+# ну тут собственно просто используем все вышеуказанные функции и каждый раз обновляем с помощью update() и получаем анимацию
+while True:
+    j += 1
+    canv.delete(j-1)
+    a = drawFigure(40*2, 40*2, 30*2) # рисуем свою фигуру с нужными параметрами
+    for i in range(len(a)):
+        a[i] = matrfor_x(a[i][0], a[i][1], a[i][2], j/100) # вращаем относительно оси ИКС
+        a[i] = matrfor_y(a[i][0], a[i][1], a[i][2], j/100) # игрек
+        # a[i] = matrfor_z(a[i][0], a[i][1], a[i][2], j/100) # зет
+        a[i] = s(a[i][0], a[i][1], a[i][2], dist)
+        print(a[i])
+    canv.create_line(a, width=2)# вот как раз та самая ОДНА линия, которая создает фигуру
+    canv.update()
+    time.sleep(0.05)
+root.mainloop()
